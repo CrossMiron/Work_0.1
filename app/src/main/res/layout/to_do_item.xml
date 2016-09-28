@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -37,7 +38,6 @@
                     android:layout_marginBottom="16dp"
                     android:layout_marginEnd="40dp"
                     android:layout_marginRight="40dp"
-                    android:background="@color/accent"
                     android:text="Супер идея"
                     android:textColor="@color/primary_text"
                     android:textSize="25sp" />
@@ -56,7 +56,6 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/title_card_view"
                     android:layout_marginBottom="20dp"
-                    android:background="@color/accent"
                     android:text="Записать курс полноценного Android приложения"
                     android:textSize="16sp" />
 
@@ -67,9 +66,20 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/content_card_view"
                     android:layout_marginBottom="16dp"
-                    android:background="@color/accent"
                     android:text="22.09.2016"
                     android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/time_card_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/content_card_view"
+                    android:layout_toRightOf="@+id/date_card_view"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="19:25:10"
+                    android:textSize="16sp"
+                    tools:ignore="RtlHardcoded" />
 
 
                 <TextView
@@ -80,8 +90,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_below="@id/content_card_view"
                     android:layout_marginBottom="16dp"
-                    android:background="@color/accent"
                     android:text="Ideas"
+                    android:textColor="@color/accent"
                     android:textSize="16sp" />
 
 
@@ -103,7 +113,8 @@
 
                         style="@style/AppTheme.TextTag"
                         android:background="@color/accent"
-                        android:text="Friends" />
+                        android:text="Friends"
+                        android:id="@+id/to_do_item_tag"/>
 
 
                 </LinearLayout>

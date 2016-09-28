@@ -14,9 +14,10 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String KEY_ID = "_id";
     public static final String KEY_TITLE = "title";
     public static final String KEY_CONTENT = "content";
-    public static final String KEY_DATE = "date";
-    public static final String KEY_CATAGORY = "category";
+    public static final String KEY_CATEGORY = "category";
     public static final String KEY_TAGS = "tags";
+    public static final String KEY_DATE = "date";
+    public static final String KEY_TIME = "time";
 
 
     public DBHelper(Context context) {
@@ -25,9 +26,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_REMINDER + "(" + KEY_ID + "integer primary key, "
-                + "text" + KEY_TITLE + KEY_CONTENT + "text" + KEY_DATE + "text" + KEY_CATAGORY + "text"
-                + KEY_TAGS + ")");
+
+        db.execSQL("create table " + TABLE_REMINDER + "(" + KEY_ID
+                + " integer primary key," + KEY_TITLE + " text," + KEY_CONTENT + " text" +
+                KEY_CATEGORY + " text" + KEY_TAGS + " text" + KEY_DATE + " text" +
+                KEY_TIME + " text" + ")");
 
 
     }
@@ -35,7 +38,6 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("drop table if exists " + TABLE_REMINDER);
-
 
         onCreate(db);
 

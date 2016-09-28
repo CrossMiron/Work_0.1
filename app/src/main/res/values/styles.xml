@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -16,5 +16,18 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">5dp</item>
     </style>
+
+    <style name="AppTheme.create_item_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginStart" tools:ignore="NewApi">10dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:textColor">@color/primary_text</item>
+    </style>
+
+
+
+
 
 </resources>

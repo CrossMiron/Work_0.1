@@ -1,16 +1,18 @@
 package com.calculator.miron.work_01.ui;
 
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.calculator.miron.work_01.R;
-import com.calculator.miron.work_01.adapter.ViewPagerAdapter;
-import com.calculator.miron.work_01.model.TabFragment;
+import com.calculator.miron.work_01.adapter.FragmentPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,21 +28,35 @@ public class MainActivity extends AppCompatActivity {
 
 
         initToolbar();
+        initFloatingActionButton();
+
 
 
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
-        setupViewPager(mViewPager);
-
         mTabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        mViewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager(), getResources().
+                getStringArray(R.array.titles_tab)));
         mTabLayout.setupWithViewPager(mViewPager);
 
 
         mTabLayout.getTabAt(0).setIcon(R.drawable.speaker_tab);
-        mTabLayout.getTabAt(0).setText(R.string.menu_item_reminders);
         mTabLayout.getTabAt(1).setIcon(R.drawable.star_tab);
-        mTabLayout.getTabAt(1).setText(R.string.menu_item_favorites);
         mTabLayout.getTabAt(2).setIcon(R.drawable.archive_tab);
-        mTabLayout.getTabAt(2).setText(R.string.menu_item_archive);
+
+
+    }
+
+
+
+    private void initFloatingActionButton() {
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, CreateItem.class));
+            }
+        });
 
 
     }
@@ -57,17 +73,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         mToolbar.inflateMenu(R.menu.menu_toolbar);
-
-    }
-
-
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new TabFragment(), "");
-        adapter.addFragment(new TabFragment(), "");
-        adapter.addFragment(new TabFragment(), "");
-        viewPager.setAdapter(adapter);
-
 
     }
 

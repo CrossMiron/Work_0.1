@@ -9,15 +9,17 @@ import android.view.ViewGroup;
 import com.calculator.miron.work_01.R;
 
 /**
- * Created by Miron on 22.09.16.
+ * Created by Miron on 28.09.16.
  */
 
-public class TabFragment extends Fragment {
+public class TabReminder extends Fragment {
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.tab_fragment, container, false);
+        View view = inflater.inflate(R.layout.tab_reminder, container, false);
         return view;
     }
 }
+
+

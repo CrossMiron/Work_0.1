@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/create_item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:context="com.calculator.miron.work_01.ui.CreateItem">
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/create_item_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/create_item_name"
+                android:textAlignment="center"
+                android:textColor="@color/accent"
+                android:textSize="25sp"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:layout_below="@id/create_item_name"
+                android:layout_marginTop="15dp"
+                android:background="@color/colorPrimary" />
+
+
+            <TextView
+                android:id="@+id/create_item_title"
+                style="@style/AppTheme.create_item_text"
+                android:layout_below="@id/line"
+                android:text="@string/create_item_title" />
+
+            <EditText
+                android:id="@+id/create_item_text_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/create_item_title"
+                android:layout_marginEnd="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginStart="10dp"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/create_item_content"
+                style="@style/AppTheme.create_item_text"
+                android:layout_below="@id/create_item_text_title"
+                android:text="@string/create_item_content" />
+
+            <EditText
+                android:id="@+id/create_item_text_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/create_item_content"
+                android:layout_marginEnd="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginStart="10dp"
+                android:singleLine="true" />
+
+
+            <TextView
+                android:id="@+id/create_item_category"
+                style="@style/AppTheme.create_item_text"
+                android:layout_below="@id/create_item_text_content"
+                android:text="@string/create_item_category" />
+
+            <EditText
+                android:id="@+id/create_item_text_category"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/create_item_category"
+                android:layout_marginEnd="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginStart="10dp"
+                android:singleLine="true" />
+
+
+            <TextView
+                android:id="@+id/create_item_tag"
+                android:layout_below="@id/create_item_text_category"
+                android:text="Таг"
+                style="@style/AppTheme.create_item_text" />
+
+            <EditText
+                android:id="@+id/create_item_text_tag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/create_item_tag"
+                android:layout_marginEnd="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginStart="10dp"
+                android:singleLine="true" />
+
+
+            <LinearLayout
+                android:id="@+id/create_item_linear_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/create_item_text_tag"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+
+                <EditText
+                    android:id="@+id/create_item_text_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Дата"
+                    android:inputType="date" />
+
+                <EditText
+                    android:id="@+id/create_item_text_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Время"
+                    android:inputType="time" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/create_item_linear_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/create_item_linear_one"
+                android:layout_marginBottom="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginStart="10dp"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/create_item_button_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/create_item_button_add" />
+
+
+                <Button
+                    android:id="@+id/create_item_button_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/create_item_button_cancel" />
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>

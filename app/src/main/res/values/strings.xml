@@ -1,9 +1,25 @@
 <resources>
     <string name="app_name">RemindMe Beta</string>
+    <string name="create_item_name">Добавление задачи</string>
     <string name="menu_search">Search</string>
     <string name="menu_item_reminders">Напоминания</string>
     <string name="menu_item_favorites">Избранное</string>
     <string name="menu_item_archive">Архив</string>
     <string name="menu_item_settings">Настройки</string>
     <string name="menu_item_info">Справка</string>
+    <string name="create_item_title">Заголовок</string>
+    <string name="create_item_content">Описание</string>
+    <string name="create_item_category">Категория</string>
+    <string name="create_item_button_add">Добавить</string>
+    <string name="create_item_button_cancel">Отмена</string>
+
+    <string-array name="titles_tab">
+        <item>Напоминания</item>
+        <item>Избранное</item>
+        <item>Архив</item>
+
+
+    </string-array>
+
+
 </resources>
