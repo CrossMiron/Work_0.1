@@ -1,11 +1,15 @@
 package com.calculator.miron.work_01.ui;
 
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -13,13 +17,22 @@ import android.view.View;
 
 import com.calculator.miron.work_01.R;
 import com.calculator.miron.work_01.adapter.FragmentPagerAdapter;
+import com.calculator.miron.work_01.model.MyDialogFragment;
+import com.calculator.miron.work_01.sql.DBHelper;
 
-public class MainActivity extends AppCompatActivity {
 
+
+
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static DBHelper mDBHelper;
     private Toolbar mToolbar;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
-
+    private DrawerLayout mDrawerLayout;
+    private NavigationView mNavigationView;
+    private MyDialogFragment mMyDialogFragment;
+    private ActionBarDrawerToggle toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         initToolbar();
         initFloatingActionButton();
+        initDrawerLayout();
 
 
 
@@ -44,9 +58,34 @@ public class MainActivity extends AppCompatActivity {
         mTabLayout.getTabAt(2).setIcon(R.drawable.archive_tab);
 
 
+        mMyDialogFragment = new MyDialogFragment();
+
+        mDBHelper = new DBHelper(this);
+
+
+        mNavigationView = (NavigationView) findViewById(R.id.navigationView);
+        mNavigationView.setNavigationItemSelectedListener(this);
+
+
     }
 
+    private void initDrawerLayout() {
 
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        toggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
+        mDrawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (toggle.onOptionsItemSelected(item))
+            return true;
+        return super.onOptionsItemSelected(item);
+    }
 
     private void initFloatingActionButton() {
 
@@ -54,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, CreateItem.class));
+                mMyDialogFragment.show(getSupportFragmentManager(), "mMyDialogFragment");
+
             }
         });
 
@@ -75,6 +115,29 @@ public class MainActivity extends AppCompatActivity {
         mToolbar.inflateMenu(R.menu.menu_toolbar);
 
     }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+
+
+
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawerLayout);
+        if(drawer.isDrawerOpen(GravityCompat.START))
+            drawer.closeDrawer(GravityCompat.START);
+
+
+        return false;
+    }
+
+
+
+
 
 
 }

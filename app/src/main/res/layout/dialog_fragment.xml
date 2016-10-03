@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:id="@+id/create_item_relative"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/create_item_title"
+                style="@style/AppTheme.create_item_text"
+                android:layout_marginTop="20dp"
+                android:text="@string/create_item_title" />
+
+
+            <EditText
+                android:id="@+id/create_item_text_title"
+                style="@style/AppTheme.create_item_edit_text"
+                android:layout_below="@id/create_item_title"
+                android:singleLine="true" />
+
+
+            <TextView
+                android:id="@+id/create_item_content"
+                style="@style/AppTheme.create_item_text"
+                android:layout_below="@id/create_item_text_title"
+                android:layout_marginTop="20dp"
+                android:text="@string/create_item_content" />
+
+            <EditText
+                android:id="@+id/create_item_text_content"
+                style="@style/AppTheme.create_item_edit_text"
+                android:layout_below="@id/create_item_content"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/create_item_category"
+                style="@style/AppTheme.create_item_text"
+                android:layout_below="@id/create_item_text_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/create_item_category" />
+
+            <EditText
+                android:id="@+id/create_item_text_category"
+                style="@style/AppTheme.create_item_edit_text"
+                android:layout_below="@id/create_item_category"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/create_item_tag"
+                style="@style/AppTheme.create_item_text"
+                android:layout_below="@id/create_item_text_category"
+                android:layout_marginTop="20dp"
+                android:text="Таг" />
+
+            <EditText
+                android:id="@+id/create_item_text_tag"
+                style="@style/AppTheme.create_item_edit_text"
+                android:layout_below="@id/create_item_tag"
+                android:singleLine="true" />
+
+            <LinearLayout
+                android:id="@+id/create_item_linear_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/create_item_text_tag"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/create_item_text_date"
+                    style="@style/AppTheme.create_item_edit_text"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Дата"
+                    android:inputType="date" />
+
+                <EditText
+                    android:id="@+id/create_item_text_time"
+                    style="@style/AppTheme.create_item_edit_text"
+                    android:layout_marginBottom="20dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="Время"
+                    android:inputType="time" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/create_item_linear_two"
+        android:layout_width="wrap_content"
+        android:layout_height="52dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/create_item_relative"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/create_item_button_cancel"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:text="@string/create_item_button_cancel"
+            android:textColor="@color/accent"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/create_item_button_add"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:text="@string/create_item_button_add"
+            android:textColor="@color/accent"
+            android:textSize="14sp"
+            tools:ignore="RtlCompat" />
+
+
+    </LinearLayout>
+</RelativeLayout>

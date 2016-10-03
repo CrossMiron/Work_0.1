@@ -12,6 +12,8 @@
     <string name="create_item_category">Категория</string>
     <string name="create_item_button_add">Добавить</string>
     <string name="create_item_button_cancel">Отмена</string>
+    <string name="open" />
+    <string name="close" />
 
     <string-array name="titles_tab">
         <item>Напоминания</item>

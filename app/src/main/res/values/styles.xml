@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:android="urn:oasis:names:tc:xliff:document:1.2" xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -20,14 +20,21 @@
     <style name="AppTheme.create_item_text">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:layout_marginStart" tools:ignore="NewApi">10dp</item>
-        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginLeft">24dp</item>
+        <item name="android:layout_marginStart" tools:ignore="NewApi">24dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
         <item name="android:textColor">@color/primary_text</item>
     </style>
 
-
-
+    <style name="AppTheme.create_item_edit_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">24dp</item>
+        <item name="android:layout_marginRight">24dp</item>
+        <item name="android:layout_marginEnd" tools:ignore="NewApi">24dp</item>
+        <item name="android:layout_marginStart" tools:ignore="NewApi">24dp</item>
+        <item name="android:textColor">@color/primary_text</item>
+    </style>
 
 
 </resources>
