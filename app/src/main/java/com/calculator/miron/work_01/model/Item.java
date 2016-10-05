@@ -25,55 +25,27 @@ public class Item {
     }
 
 
-
-    public String getmTitle() {
+    public String getTitle() {
         return mTitle;
     }
 
-    public void setmTitle(String mTitle) {
-        this.mTitle = mTitle;
-    }
-
-    public String getmContent() {
+    public String getContent() {
         return mContent;
     }
 
-    public void setmContent(String mContent) {
-        this.mContent = mContent;
-    }
-
-    public String getmCategory() {
+    public String getCategory() {
         return mCategory;
     }
 
-    public void setmCategory(String mCategory) {
-        this.mCategory = mCategory;
-    }
-
-    public String getmTag() {
+    public String getTag() {
         return mTag;
     }
 
-    public void setmTag(String mTag) {
-        this.mTag = mTag;
-    }
-
-    public String getmDate() {
+    public String getDate() {
         return mDate;
     }
 
-    public void setmDate(String mDate) {
-        this.mDate = mDate;
-    }
-
-    public String getmTime() {
+    public String getTime() {
         return mTime;
     }
-
-    public void setmTime(String mTime) {
-        this.mTime = mTime;
-    }
-
-  
-
 }
