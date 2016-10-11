@@ -99,41 +99,4 @@
         </RelativeLayout>
 
     </ScrollView>
-
-    <LinearLayout
-        android:id="@+id/create_item_linear_two"
-        android:layout_width="wrap_content"
-        android:layout_height="52dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/create_item_relative"
-        android:orientation="horizontal">
-
-
-        <Button
-            android:id="@+id/create_item_button_cancel"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:layout_gravity="center"
-            android:padding="8dp"
-            android:text="@string/create_item_button_cancel"
-            android:textColor="@color/accent"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/create_item_button_add"
-            style="?android:attr/borderlessButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="36dp"
-            android:layout_gravity="center"
-            android:layout_margin="8dp"
-            android:padding="8dp"
-            android:text="@string/create_item_button_add"
-            android:textColor="@color/accent"
-            android:textSize="14sp"
-            tools:ignore="RtlCompat" />
-
-
-    </LinearLayout>
 </RelativeLayout>

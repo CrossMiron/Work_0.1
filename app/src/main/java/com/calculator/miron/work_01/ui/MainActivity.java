@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         mMyDialogFragment = new MyDialogFragment();
 
+
         mDBHelper = new DBHelper(this);
 
 
