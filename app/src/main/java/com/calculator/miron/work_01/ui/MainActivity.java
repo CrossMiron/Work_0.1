@@ -15,21 +15,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import com.calculator.miron.work_01.R;
 import com.calculator.miron.work_01.adapter.FragmentPagerAdapter;
 import com.calculator.miron.work_01.model.MyDialogFragment;
+import com.calculator.miron.work_01.model.TabListing;
 import com.calculator.miron.work_01.sql.DBHelper;
-
-
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static DBHelper mDBHelper;
+    public ViewPager mViewPager;
     private Toolbar mToolbar;
     private TabLayout mTabLayout;
-    private ViewPager mViewPager;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
     private MyDialogFragment mMyDialogFragment;
@@ -44,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         initToolbar();
         initFloatingActionButton();
         initDrawerLayout();
-
 
 
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -131,19 +128,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
+        mDrawerLayout.setDrawerListener(toggle);
+        toggle.syncState();
+
         switch (item.getItemId()) {
-
-
-
-
+            case R.id.menu_item_reminders:
+                mViewPager.setCurrentItem(TabListing.TAB_REMINDER);
+                break;
+            case R.id.menu_item_favorites:
+                mViewPager.setCurrentItem(TabListing.TAB_FAVORITE);
+                break;
+            case R.id.menu_item_archive:
+                mViewPager.setCurrentItem(TabListing.TAB_ARCHIVE);
+                break;
+            case R.id.menu_item_settings:
+                mViewPager.setCurrentItem(TabListing.TAB_SERRINGS);
+                break;
+            case R.id.menu_item_info:
+                mViewPager.setCurrentItem(TabListing.TAB_INFO);
+                break;
         }
 
-        DrawerLayout drawer = (DrawerLayout)findViewById(R.id.drawerLayout);
-        if(drawer.isDrawerOpen(GravityCompat.START))
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
+        if (drawer.isDrawerOpen(GravityCompat.START))
             drawer.closeDrawer(GravityCompat.START);
 
 
-        return false;
+        return true;
     }
 
 
