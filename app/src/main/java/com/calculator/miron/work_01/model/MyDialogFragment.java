@@ -34,7 +34,6 @@ public class MyDialogFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.create_item_name);
-
         builder.setView(view);
 
 
