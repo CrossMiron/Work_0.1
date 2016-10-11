@@ -37,7 +37,7 @@ public class MyDialogFragment extends DialogFragment implements View.OnClickList
 
 
     }
-    
+
 
 
     @Override

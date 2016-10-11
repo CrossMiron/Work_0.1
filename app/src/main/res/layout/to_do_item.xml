@@ -56,18 +56,6 @@
                 android:text="22.09.2016"
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/cv_tv_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/cv_tv_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@+id/cv_tv_date"
-                android:text="19:25:10"
-                android:textSize="16sp"
-                tools:ignore="RtlHardcoded" />
-
 
             <TextView
                 android:id="@+id/cv_tv_category"
@@ -80,6 +68,19 @@
                 android:text="Ideas"
                 android:textColor="@color/accent"
                 android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/cv_tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="21dp"
+                android:text="19:25:10"
+                android:textSize="16sp"
+                tools:ignore="RtlHardcoded"
+                android:layout_below="@+id/cv_tv_content"
+                android:layout_toRightOf="@+id/cv_tv_date"
+                android:layout_toEndOf="@+id/cv_tv_date"
+                android:layout_marginStart="21dp" />
 
 
         </RelativeLayout>

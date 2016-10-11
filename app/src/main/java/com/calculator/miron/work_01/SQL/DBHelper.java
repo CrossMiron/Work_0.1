@@ -1,6 +1,5 @@
 package com.calculator.miron.work_01.sql;
 
-import android.app.Fragment;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
