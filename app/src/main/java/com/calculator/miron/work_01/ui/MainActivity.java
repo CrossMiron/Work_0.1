@@ -53,9 +53,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mTabLayout.setupWithViewPager(mViewPager);
 
 
-        mTabLayout.getTabAt(0).setIcon(R.drawable.speaker_tab);
-        mTabLayout.getTabAt(1).setIcon(R.drawable.star_tab);
-        mTabLayout.getTabAt(2).setIcon(R.drawable.archive_tab);
+        mTabLayout.getTabAt(0).setIcon(R.drawable.tab_speaker);
+        mTabLayout.getTabAt(1).setIcon(R.drawable.tab_star);
+        mTabLayout.getTabAt(2).setIcon(R.drawable.tab_archive);
+        mTabLayout.getTabAt(3).setIcon(R.drawable.tab_settings);
+        mTabLayout.getTabAt(4).setIcon(R.drawable.tab_info);
 
 
         mMyDialogFragment = new MyDialogFragment();
@@ -134,10 +136,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         return false;
     }
-
-
-
-
 
 
 }

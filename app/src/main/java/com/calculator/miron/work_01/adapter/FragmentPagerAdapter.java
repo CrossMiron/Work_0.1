@@ -5,7 +5,9 @@ import android.support.v4.app.FragmentManager;
 
 import com.calculator.miron.work_01.model.TabArchive;
 import com.calculator.miron.work_01.model.TabFavorites;
+import com.calculator.miron.work_01.model.TabInfo;
 import com.calculator.miron.work_01.model.TabReminder;
+import com.calculator.miron.work_01.model.TabSettings;
 
 /**
  * Created by Miron on 28.09.16.
@@ -30,6 +32,10 @@ public class FragmentPagerAdapter extends android.support.v4.app.FragmentPagerAd
                 return new TabFavorites();
             case 2:
                 return new TabArchive();
+            case 3:
+                return new TabSettings();
+            case 4:
+                return new TabInfo();
             default:
                 return null;
         }
