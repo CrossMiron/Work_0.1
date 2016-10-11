@@ -51,9 +51,9 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public void saveTask (String title, String content, String category, String tag,
-                          String date, String time) {
-        
+    public static boolean saveTask(String title, String content, String category, String tag,
+                                   String date, String time) {
+
         SQLiteDatabase database = mDBHelper.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -94,8 +94,6 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
 
 
+        return false;
     }
-
-
-
 }

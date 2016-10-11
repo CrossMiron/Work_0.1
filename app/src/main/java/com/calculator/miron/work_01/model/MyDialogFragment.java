@@ -1,10 +1,7 @@
 package com.calculator.miron.work_01.model;
 
 
-import android.content.ContentValues;
 import android.content.DialogInterface;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -12,13 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.calculator.miron.work_01.R;
 import com.calculator.miron.work_01.sql.DBHelper;
-
-import static com.calculator.miron.work_01.ui.MainActivity.mDBHelper;
 
 
 public class MyDialogFragment extends DialogFragment implements View.OnClickListener {
@@ -43,13 +37,7 @@ public class MyDialogFragment extends DialogFragment implements View.OnClickList
 
 
     }
-
-
-
-
-
-
-
+    
 
 
     @Override
@@ -61,49 +49,19 @@ public class MyDialogFragment extends DialogFragment implements View.OnClickList
         String date = mDate.getText().toString();
         String time = mTime.getText().toString();
 
-        SQLiteDatabase database = mDBHelper.getWritableDatabase();
+        AddData(title, content, category, tag, date, time);
+        mTitle.setText("");
+        mContent.setText("");
+        mCategory.setText("");
+        mTag.setText("");
+        mDate.setText("");
+        mTime.setText("");
 
-        ContentValues contentValues = new ContentValues();
+    }
 
-        contentValues.put(DBHelper.KEY_TITLE, title);
-        contentValues.put(DBHelper.KEY_CONTENT, content);
-        contentValues.put(DBHelper.KEY_CATEGORY, category);
-        contentValues.put(DBHelper.KEY_TAG, tag);
-        contentValues.put(DBHelper.KEY_DATE, date);
-        contentValues.put(DBHelper.KEY_TIME, time);
+    private void AddData(String title, String content, String category, String tag, String date, String time) {
 
-        database.insert(DBHelper.TABLE_REMINDER, null, contentValues);
-
-        Cursor cursor = database.query(DBHelper.TABLE_REMINDER, null, null, null, null, null, null);
-
-        if (cursor.moveToFirst()) {
-            int idIndex = cursor.getColumnIndex(DBHelper.KEY_ID);
-            int titleIndex = cursor.getColumnIndex(DBHelper.KEY_TITLE);
-            int contentIndex = cursor.getColumnIndex(DBHelper.KEY_CONTENT);
-            int categoryIndex = cursor.getColumnIndex(DBHelper.KEY_CATEGORY);
-            int tagIndex = cursor.getColumnIndex(DBHelper.KEY_TAG);
-            int dateIndex = cursor.getColumnIndex(DBHelper.KEY_DATE);
-            int timeIndex = cursor.getColumnIndex(DBHelper.KEY_TIME);
-
-
-            do {
-                Log.d("mLog", "ID = " + cursor.getInt(idIndex) +
-                        ", title = " + cursor.getString(titleIndex) +
-                        ", content = " + cursor.getString(contentIndex) +
-                        ", category = " + cursor.getString(categoryIndex) +
-                        ", tag = " + cursor.getString(tagIndex) +
-                        ", date = " + cursor.getString(dateIndex) +
-                        ", time = " + cursor.getString(timeIndex));
-            } while (cursor.moveToNext());
-        } else
-            Log.d("mLog", "0 rows");
-
-        cursor.close();
-
-
-        Log.d(LOG_TAG, "Dialog 1: " + ((Button) view).getText());
-        dismiss();
-
+        boolean insertData = DBHelper.saveTask(title, content, category, tag, date, time);
     }
 
 
