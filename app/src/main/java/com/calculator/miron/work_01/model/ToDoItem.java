@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Created by Miron on 05.10.16.
  */
 
-public class Item {
+public class ToDoItem {
 
     private String mTitle;
     private String mContent;
@@ -15,7 +15,7 @@ public class Item {
     private String mDate;
     private String mTime;
 
-    public Item(String title, String content, String category, String tag, String date, String time) {
+    public ToDoItem(String title, String content, String category, String tag, String date, String time) {
         this.mTitle = title;
         this.mContent = content;
         this.mCategory = category;

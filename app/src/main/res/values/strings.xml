@@ -14,6 +14,7 @@
     <string name="create_item_button_cancel">Отмена</string>
     <string name="open" />
     <string name="close" />
+    <string name="more">More...</string>
 
     <string-array name="titles_tab">
         <item>Напоминания</item>

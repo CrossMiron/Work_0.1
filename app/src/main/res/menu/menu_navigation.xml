@@ -19,18 +19,28 @@
         android:icon="@drawable/ic_archive_navigation"
         android:orderInCategory="1"
         android:title="@string/menu_item_archive" />
-    <item
-        android:id="@+id/menu_item_settings"
-        android:icon="@drawable/ic_settings_navigation"
+
+
+    <item android:id="@+id/navigation_menu"
         android:orderInCategory="1"
-        android:title="@string/menu_item_settings" />
+        android:title="@string/more">
 
-    <item
-        android:id="@+id/menu_item_info"
-        android:icon="@drawable/ic_info_navigation"
-        android:orderInCategory="1"
-        android:title="@string/menu_item_info" />
+        <menu>
 
+            <item
+                android:id="@+id/menu_item_settings"
+                android:icon="@drawable/ic_settings_navigation"
+                android:orderInCategory="1"
+                android:title="@string/menu_item_settings" />
 
+            <item
+                android:id="@+id/menu_item_info"
+                android:icon="@drawable/ic_info_navigation"
+                android:orderInCategory="1"
+                android:title="@string/menu_item_info" />
+
+        </menu>
+
+    </item>
 
 </menu>
