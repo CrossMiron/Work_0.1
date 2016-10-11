@@ -127,11 +127,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar, R.string.open, R.string.close);
-        mDrawerLayout.setDrawerListener(toggle);
-        toggle.syncState();
-
+        
         switch (item.getItemId()) {
             case R.id.menu_item_reminders:
                 mViewPager.setCurrentItem(TabListing.TAB_REMINDER);
