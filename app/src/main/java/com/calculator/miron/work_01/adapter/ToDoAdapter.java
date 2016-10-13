@@ -31,6 +31,13 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        ToDoItem item = mTodoItemsList.get(position);
+        holder.mTitle.setText(item.getTitle());
+        holder.mContent.setText(item.getContent());
+        holder.mCategory.setText(item.getCategory());
+        holder.mTag.setText(item.getTag());
+        holder.mDate.setText(item.getDate());
+        holder.mTime.setText(item.getTime());
 
     }
 

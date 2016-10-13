@@ -25,6 +25,7 @@ public class ToDoItem {
     }
 
 
+
     public String getTitle() {
         return mTitle;
     }
@@ -48,4 +49,24 @@ public class ToDoItem {
     public String getTime() {
         return mTime;
     }
+
+
+    public ToDoItem(String s, boolean b) {
+    }
+
+
+
+    private static int lastItemId = 0;
+
+    public static ArrayList<ToDoItem> createToDoItemList(int numItems) {
+        ArrayList<ToDoItem> Items = new ArrayList<ToDoItem>();
+
+        for (int i = 1; i <= numItems; i++) {
+            Items.add(new ToDoItem("Item " + ++lastItemId, i <= numItems / 2));
+        }
+
+        return Items;
+    }
+
+
 }
