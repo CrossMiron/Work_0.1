@@ -7,12 +7,21 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.calculator.miron.work_01.R;
+import com.calculator.miron.work_01.model.ToDoItem;
+
+import java.util.ArrayList;
 
 /**
  * Created by Miron on 13.10.16.
  */
 
 public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
+
+    private ArrayList<ToDoItem> mTodoItemsList;
+
+    public ToDoAdapter(ArrayList<ToDoItem> todoItemsList) {
+        mTodoItemsList = todoItemsList;
+    }
 
 
     @Override
@@ -33,6 +42,11 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView mTitle;
+        public TextView mContent;
+        public TextView mCategory;
+        public TextView mTag;
+        public TextView mDate;
+        public TextView mTime;
 
 
         public ViewHolder(View itemView) {
@@ -40,6 +54,11 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
             super(itemView);
 
             mTitle = (TextView) itemView.findViewById(R.id.cv_tv_title);
+            mContent = (TextView) itemView.findViewById(R.id.cv_tv_content);
+            mCategory = (TextView) itemView.findViewById(R.id.cv_tv_category);
+            mTag = (TextView) itemView.findViewById(R.id.cv_tv_tag);
+            mDate = (TextView) itemView.findViewById(R.id.cv_tv_date);
+            mTime = (TextView) itemView.findViewById(R.id.cv_tv_time);
 
         }
     }
