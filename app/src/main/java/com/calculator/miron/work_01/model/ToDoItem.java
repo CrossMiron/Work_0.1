@@ -1,6 +1,16 @@
 package com.calculator.miron.work_01.model;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import com.calculator.miron.work_01.sql.DBHelper;
+
 import java.util.ArrayList;
+
+import static com.calculator.miron.work_01.ui.MainActivity.mDBHelper;
 
 /**
  * Created by Miron on 05.10.16.
@@ -8,7 +18,7 @@ import java.util.ArrayList;
 
 public class ToDoItem {
 
-    private String mTitle;
+    public String mTitle;
     private String mContent;
     private String mCategory;
     private String mTag;
@@ -51,22 +61,8 @@ public class ToDoItem {
     }
 
 
-    public ToDoItem(String s, boolean b) {
-    }
 
 
-
-    private static int lastItemId = 0;
-
-    public static ArrayList<ToDoItem> createToDoItemList(int numItems) {
-        ArrayList<ToDoItem> Items = new ArrayList<ToDoItem>();
-
-        for (int i = 1; i <= numItems; i++) {
-            Items.add(new ToDoItem("Item " + ++lastItemId, i <= numItems / 2));
-        }
-
-        return Items;
-    }
 
 
 }

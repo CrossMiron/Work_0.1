@@ -64,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDBHelper = new DBHelper(this);
 
 
+
+
         mNavigationView = (NavigationView) findViewById(R.id.navigationView);
         mNavigationView.setNavigationItemSelectedListener(this);
 

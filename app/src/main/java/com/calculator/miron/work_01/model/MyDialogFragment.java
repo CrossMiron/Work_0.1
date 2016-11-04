@@ -7,16 +7,22 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.calculator.miron.work_01.R;
+import com.calculator.miron.work_01.adapter.ToDoAdapter;
 import com.calculator.miron.work_01.sql.DBHelper;
+
+import java.util.ArrayList;
 
 
 public class MyDialogFragment extends DialogFragment {
 
-    final String LOG_TAG = "myLogs";
+
     public EditText mTitle, mContent, mCategory, mTag, mDate, mTime;
 
     @NonNull
@@ -54,18 +60,35 @@ public class MyDialogFragment extends DialogFragment {
                 mDate.setText("");
                 mTime.setText("");
 
+
+
+
+
+
             }
         })
                 .setNegativeButton(R.string.create_item_button_cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                     }
                 });
+
+
+
+
         return builder.create();
+
+
+
+
     }
     private void AddData(String title, String content, String category, String tag, String date, String time) {
 
         boolean insertData = DBHelper.saveTask(title, content, category, tag, date, time);
     }
+
+
+
+
 
 }
 

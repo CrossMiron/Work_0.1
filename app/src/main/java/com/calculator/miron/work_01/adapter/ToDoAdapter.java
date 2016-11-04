@@ -1,6 +1,8 @@
 package com.calculator.miron.work_01.adapter;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -25,8 +27,13 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+    public ToDoAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Context context = parent.getContext();
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View contactView = inflater.inflate(R.layout.to_do_item, parent, false);
+        ViewHolder viewHolder = new ViewHolder(contactView);
+
+        return viewHolder;
     }
 
     @Override
@@ -43,7 +50,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mTodoItemsList.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

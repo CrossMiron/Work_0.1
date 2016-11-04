@@ -7,10 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.calculator.miron.work_01.model.ToDoItem;
+
+import java.util.ArrayList;
+
 import static com.calculator.miron.work_01.ui.MainActivity.mDBHelper;
 
 
-public class DBHelper extends SQLiteOpenHelper {
+public class    DBHelper extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "todo";
@@ -66,6 +70,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         database.insert(DBHelper.TABLE_REMINDER, null, contentValues);
 
+
         Cursor cursor = database.query(DBHelper.TABLE_REMINDER, null, null, null, null, null, null);
 
         if (cursor.moveToFirst()) {
@@ -78,8 +83,7 @@ public class DBHelper extends SQLiteOpenHelper {
             int timeIndex = cursor.getColumnIndex(DBHelper.KEY_TIME);
 
 
-            do {
-                Log.d("mLog", "ID = " + cursor.getInt(idIndex) +
+            do { Log.d("mLog", "ID = " + cursor.getInt(idIndex) +
                         ", title = " + cursor.getString(titleIndex) +
                         ", content = " + cursor.getString(contentIndex) +
                         ", category = " + cursor.getString(categoryIndex) +
@@ -95,4 +99,39 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return false;
     }
+
+
+
+
+    public static ArrayList<ToDoItem> createToDoItemList() {
+        ArrayList<ToDoItem> Items = new ArrayList<ToDoItem>();
+
+        SQLiteDatabase database = mDBHelper.getReadableDatabase();
+
+        Cursor cursor = database.query(DBHelper.TABLE_REMINDER, null, null, null, null, null, null);
+
+
+        if (cursor.moveToFirst()) {
+            int titleIndex = cursor.getColumnIndex(DBHelper.KEY_TITLE);
+            int contentIndex = cursor.getColumnIndex(DBHelper.KEY_CONTENT);
+            int categoryIndex = cursor.getColumnIndex(DBHelper.KEY_CATEGORY);
+            int tagIndex = cursor.getColumnIndex(DBHelper.KEY_TAG);
+            int dateIndex = cursor.getColumnIndex(DBHelper.KEY_DATE);
+            int timeIndex = cursor.getColumnIndex(DBHelper.KEY_TIME);
+
+            do {Items.add(new ToDoItem(cursor.getString(titleIndex), cursor.getString(contentIndex),
+                    cursor.getString(categoryIndex), cursor.getString(tagIndex), cursor.getString(dateIndex),
+                    cursor.getString(timeIndex)));
+
+
+            }while (cursor.moveToNext());
+
+
+        } else cursor.close();
+
+
+        return Items;
+    }
+
+
 }

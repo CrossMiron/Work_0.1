@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.calculator.miron.work_01.R;
 import com.calculator.miron.work_01.adapter.ToDoAdapter;
+import com.calculator.miron.work_01.sql.DBHelper;
 
 import java.util.ArrayList;
 
@@ -19,9 +20,9 @@ import java.util.ArrayList;
 
 public class TabReminder extends Fragment {
 
-    ToDoAdapter mAdapter;
-    ArrayList<ToDoItem> mTodoItemsList;
-    RecyclerView mRecyclerView;
+     ToDoAdapter mAdapter;
+     ArrayList<ToDoItem> mTodoItemsList;
+     RecyclerView mRecyclerView;
 
 
     public static TabReminder newInstance() {
@@ -37,17 +38,20 @@ public class TabReminder extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_reminder, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.mRecycler);
-        mTodoItemsList = new ArrayList<>();
+        mTodoItemsList = DBHelper.createToDoItemList();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new ToDoAdapter (mTodoItemsList);
         mRecyclerView.setAdapter(mAdapter);
-
         return view;
 
 
 
     }
+
+
+
+
 }
 
 
