@@ -7,36 +7,32 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.calculator.miron.work_01.R;
-import com.calculator.miron.work_01.adapter.ToDoAdapter;
 import com.calculator.miron.work_01.sql.DBHelper;
-
-import java.util.ArrayList;
 
 
 public class MyDialogFragment extends DialogFragment {
 
 
     public EditText mTitle, mContent, mCategory, mTag, mDate, mTime;
+    private View view;
+
+
 
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        View view = getActivity().getLayoutInflater().inflate(R.layout.dialog_fragment, null);
+        view = getActivity().getLayoutInflater().inflate(R.layout.dialog_fragment, null);
         mTitle = (EditText) view.findViewById(R.id.create_item_text_title);
         mContent = (EditText) view.findViewById(R.id.create_item_text_content);
         mCategory = (EditText) view.findViewById(R.id.create_item_text_category);
         mTag = (EditText) view.findViewById(R.id.create_item_text_tag);
         mDate = (EditText) view.findViewById(R.id.create_item_text_date);
         mTime = (EditText) view.findViewById(R.id.create_item_text_time);
-
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(R.string.create_item_name);
@@ -62,9 +58,6 @@ public class MyDialogFragment extends DialogFragment {
 
 
 
-
-
-
             }
         })
                 .setNegativeButton(R.string.create_item_button_cancel, new DialogInterface.OnClickListener() {
@@ -85,7 +78,6 @@ public class MyDialogFragment extends DialogFragment {
 
         boolean insertData = DBHelper.saveTask(title, content, category, tag, date, time);
     }
-
 
 
 

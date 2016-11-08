@@ -9,29 +9,36 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
 import com.calculator.miron.work_01.R;
 import com.calculator.miron.work_01.adapter.FragmentPagerAdapter;
+import com.calculator.miron.work_01.adapter.ToDoAdapter;
 import com.calculator.miron.work_01.model.MyDialogFragment;
 import com.calculator.miron.work_01.model.TabListing;
+import com.calculator.miron.work_01.model.ToDoItem;
 import com.calculator.miron.work_01.sql.DBHelper;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public static DBHelper mDBHelper;
     public ViewPager mViewPager;
-    private Toolbar mToolbar;
-    private TabLayout mTabLayout;
-    private DrawerLayout mDrawerLayout;
-    private NavigationView mNavigationView;
-    private MyDialogFragment mMyDialogFragment;
-    private ActionBarDrawerToggle toggle;
+    public TabLayout mTabLayout;
+    public NavigationView mNavigationView;
+    public MyDialogFragment mMyDialogFragment;
+    public ToDoAdapter mAdapter;
+    public ArrayList<ToDoItem> mTodoItemsList;
+    public RecyclerView mRecyclerView;
+    public Toolbar mToolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
 
-        initToolbar();
         initFloatingActionButton();
-        initDrawerLayout();
 
 
         mViewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -64,38 +69,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDBHelper = new DBHelper(this);
 
 
-
-
         mNavigationView = (NavigationView) findViewById(R.id.navigationView);
         mNavigationView.setNavigationItemSelectedListener(this);
 
 
-    }
-
-    private void initDrawerLayout() {
-
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        toggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.close);
-        mDrawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mToolbar = (Toolbar) findViewById(R.id.toolBar);
+        setSupportActionBar(mToolbar);
 
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (toggle.onOptionsItemSelected(item))
-            return true;
-        return super.onOptionsItemSelected(item);
-    }
 
     private void initFloatingActionButton() {
 
@@ -111,21 +93,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
-    private void initToolbar() {
-        mToolbar = (Toolbar) findViewById(R.id.toolBar);
-        setSupportActionBar(mToolbar);/// Если убрать эту строку, появится иконка поска...Хммм
-        mToolbar.setTitle(R.string.app_name);
-        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                return false;
-            }
-        });
-        mToolbar.inflateMenu(R.menu.menu_toolbar);
-
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+
+        if (id == R.id.button_menu_refresh) {
+            mRecyclerView = (RecyclerView) findViewById(R.id.mRecycler);
+            mTodoItemsList = DBHelper.createToDoItemList();
+            mAdapter = new ToDoAdapter(mTodoItemsList);
+            mRecyclerView.setAdapter(mAdapter);
+            mAdapter.notifyDataSetChanged();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
