@@ -38,14 +38,12 @@ public class TabReminder extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tab_reminder, container, false);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.mRecycler);
-        mTodoItemsList = DBHelper.createToDoItemList();
+        mTodoItemsList = DBHelper.getsInstance(getActivity()).createToDoItemList();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new ToDoAdapter (mTodoItemsList);
         mRecyclerView.setAdapter(mAdapter);
         return view;
-
-
 
     }
 

@@ -11,10 +11,7 @@ import com.calculator.miron.work_01.model.ToDoItem;
 
 import java.util.ArrayList;
 
-import static com.calculator.miron.work_01.ui.MainActivity.mDBHelper;
-
-
-public class    DBHelper extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "todo";
@@ -28,11 +25,24 @@ public class    DBHelper extends SQLiteOpenHelper {
     public static final String KEY_DATE = "date";
     public static final String KEY_TIME = "time";
 
+    private static DBHelper sDBHelper;
 
-    public DBHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    /**
+     * Get DBHelper instance
+     *
+     * @param context Activity context
+     * @return DBHelper instance
+     */
+    public static synchronized DBHelper getsInstance(Context context) {
+        if (sDBHelper == null) {
+            sDBHelper = new DBHelper(context.getApplicationContext());
+        }
+        return sDBHelper;
     }
 
+    private DBHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -54,59 +64,43 @@ public class    DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public static boolean saveTask(String title, String content, String category, String tag,
-                                   String date, String time) {
+    public boolean saveTask(ToDoItem toDoItem) {
+        if (toDoItem == null) return false;
+        long result = -1;
 
-        SQLiteDatabase database = mDBHelper.getWritableDatabase();
+        SQLiteDatabase database = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(DBHelper.KEY_TITLE, title);
-        contentValues.put(DBHelper.KEY_CONTENT, content);
-        contentValues.put(DBHelper.KEY_CATEGORY, category);
-        contentValues.put(DBHelper.KEY_TAG, tag);
-        contentValues.put(DBHelper.KEY_DATE, date);
-        contentValues.put(DBHelper.KEY_TIME, time);
+        contentValues.put(DBHelper.KEY_TITLE, toDoItem.getTitle());
+        contentValues.put(DBHelper.KEY_CONTENT, toDoItem.getContent());
+        contentValues.put(DBHelper.KEY_CATEGORY, toDoItem.getCategory());
+        contentValues.put(DBHelper.KEY_TAG, toDoItem.getTag());
+        contentValues.put(DBHelper.KEY_DATE, toDoItem.getDate());
+        contentValues.put(DBHelper.KEY_TIME, toDoItem.getTime());
 
-        database.insert(DBHelper.TABLE_REMINDER, null, contentValues);
+        // TODO: 09.11.16 Перед вставкой новой записи нужно проверить что такая запись не существует.
+        // Если существует, то вызывать update
 
+        result = database.insert(DBHelper.TABLE_REMINDER, null, contentValues);
 
-        Cursor cursor = database.query(DBHelper.TABLE_REMINDER, null, null, null, null, null, null);
+        Log.d("mLog", "task was saved success - " + (result > -1) +
+                ", ID = " + result +
+                ", title = " + toDoItem.getTitle() +
+                ", content = " + toDoItem.getContent() +
+                ", category = " + toDoItem.getCategory() +
+                ", tag = " + toDoItem.getTag() +
+                ", date = " + toDoItem.getDate() +
+                ", time = " + toDoItem.getTime());
 
-        if (cursor.moveToFirst()) {
-            int idIndex = cursor.getColumnIndex(DBHelper.KEY_ID);
-            int titleIndex = cursor.getColumnIndex(DBHelper.KEY_TITLE);
-            int contentIndex = cursor.getColumnIndex(DBHelper.KEY_CONTENT);
-            int categoryIndex = cursor.getColumnIndex(DBHelper.KEY_CATEGORY);
-            int tagIndex = cursor.getColumnIndex(DBHelper.KEY_TAG);
-            int dateIndex = cursor.getColumnIndex(DBHelper.KEY_DATE);
-            int timeIndex = cursor.getColumnIndex(DBHelper.KEY_TIME);
-
-
-            do { Log.d("mLog", "ID = " + cursor.getInt(idIndex) +
-                        ", title = " + cursor.getString(titleIndex) +
-                        ", content = " + cursor.getString(contentIndex) +
-                        ", category = " + cursor.getString(categoryIndex) +
-                        ", tag = " + cursor.getString(tagIndex) +
-                        ", date = " + cursor.getString(dateIndex) +
-                        ", time = " + cursor.getString(timeIndex));
-            } while (cursor.moveToNext());
-        } else
-            Log.d("mLog", "0 rows");
-
-        cursor.close();
-
-
-        return false;
+        return result > -1;
     }
 
 
-
-
-    public static ArrayList<ToDoItem> createToDoItemList() {
+    public ArrayList<ToDoItem> createToDoItemList() {
         ArrayList<ToDoItem> Items = new ArrayList<ToDoItem>();
 
-        SQLiteDatabase database = mDBHelper.getReadableDatabase();
+        SQLiteDatabase database = getReadableDatabase();
 
         Cursor cursor = database.query(DBHelper.TABLE_REMINDER, null, null, null, null, null, null);
 
