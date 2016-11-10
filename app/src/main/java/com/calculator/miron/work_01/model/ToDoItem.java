@@ -1,17 +1,5 @@
 package com.calculator.miron.work_01.model;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
-import com.calculator.miron.work_01.sql.DBHelper;
-
-import java.util.ArrayList;
-
-import static com.calculator.miron.work_01.ui.MainActivity.mDBHelper;
-
 /**
  * Created by Miron on 05.10.16.
  */

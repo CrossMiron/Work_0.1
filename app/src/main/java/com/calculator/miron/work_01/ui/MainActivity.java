@@ -1,6 +1,7 @@
 package com.calculator.miron.work_01.ui;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +31,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static DBHelper mDBHelper;
     public ViewPager mViewPager;
     public TabLayout mTabLayout;
     public NavigationView mNavigationView;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public ArrayList<ToDoItem> mTodoItemsList;
     public RecyclerView mRecyclerView;
     public Toolbar mToolbar;
-
+    private DBHelper mDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getStringArray(R.array.titles_tab)));
         mTabLayout.setupWithViewPager(mViewPager);
 
-
+        // TODO: 09.11.16 Need to fix it. Method invocation 'setIcon' may produce 'java.lang.NullPointerException'
         mTabLayout.getTabAt(0).setIcon(R.drawable.tab_speaker);
         mTabLayout.getTabAt(1).setIcon(R.drawable.tab_star);
         mTabLayout.getTabAt(2).setIcon(R.drawable.tab_archive);
@@ -63,11 +64,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mTabLayout.getTabAt(4).setIcon(R.drawable.tab_info);
 
 
-        mMyDialogFragment = new MyDialogFragment();
+        mDbHelper = DBHelper.getsInstance(this);
+        mTodoItemsList = mDbHelper.createToDoItemList();
+        mAdapter = new ToDoAdapter(mTodoItemsList);
 
-
-        mDBHelper = new DBHelper(this);
-
+        //show dialog for add new task
+        mMyDialogFragment = MyDialogFragment.newInstance(new MyDialogFragment.CallbacksAdapter() {
+            @Override
+            public void onAddTask(ToDoItem toDoItem) {
+                if (toDoItem == null) return;
+                //save data to DB
+                new UpdateDataTask().execute(toDoItem);
+            }
+        });
 
         mNavigationView = (NavigationView) findViewById(R.id.navigationView);
         mNavigationView.setNavigationItemSelectedListener(this);
@@ -107,11 +116,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
         if (id == R.id.button_menu_refresh) {
-            mRecyclerView = (RecyclerView) findViewById(R.id.mRecycler);
-            mTodoItemsList = DBHelper.createToDoItemList();
-            mAdapter = new ToDoAdapter(mTodoItemsList);
-            mRecyclerView.setAdapter(mAdapter);
-            mAdapter.notifyDataSetChanged();
+            refreshList();
             return true;
         }
 
@@ -148,5 +153,47 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    /**
+     * Method for refresh tasks list
+     * TODO: needs to move it to Tab fragment, because activity_main.xml doesn`t contain RecyclerView
+     */
+    private void refreshList() {
+        if (mAdapter != null && mTodoItemsList != null) {
+            Log.d("tag-debug", "MainActivity.refreshList(): ");
+            mRecyclerView = (RecyclerView) findViewById(R.id.mRecycler);
+            if (mRecyclerView != null) {
+                mRecyclerView.setAdapter(mAdapter);
+            }
+
+            mTodoItemsList.clear();
+            //get data from DB for populate tasks list
+            mTodoItemsList.addAll(mDbHelper.createToDoItemList());
+            //refresh the tasks list on the screen
+            mAdapter.notifyDataSetChanged();
+            //scroll to last position
+            //mRecyclerView.scrollToPosition(mTodoItemsList.size() - 1);
+        }
+    }
+
+    /**
+     * Async Task for update database and refresh list
+     * TODO: need to move it to Tab fragment
+     */
+    private class UpdateDataTask extends AsyncTask<ToDoItem, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(ToDoItem... params) {
+            ToDoItem toDoItem = params[0];
+            boolean isSuccess = mDbHelper.saveTask(toDoItem);
+            return isSuccess;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean isSuccess) {
+            //if DB update was success
+            if (isSuccess) {
+                refreshList();
+            }
+        }
+    }
 
 }
